@@ -1,5 +1,6 @@
 package com.aparaskov.currency_rate_downloader.service.impl;
 
+import com.aparaskov.currency_rate_downloader.exception.DownloadingException;
 import com.aparaskov.currency_rate_downloader.exception.NoNewCurrencyRateException;
 import com.aparaskov.currency_rate_downloader.mapper.CurrencyRateMapper;
 import com.aparaskov.currency_rate_downloader.model.Currency;
@@ -12,6 +13,7 @@ import com.aparaskov.currency_rate_downloader.repository.CurrencyRepository;
 import com.aparaskov.currency_rate_downloader.repository.RateRepository;
 import com.aparaskov.currency_rate_downloader.service.CurrencyRateService;
 import com.aparaskov.currency_rate_downloader.service.NotificationService;
+import jakarta.transaction.Transactional;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
@@ -28,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static com.aparaskov.currency_rate_downloader.exception.ErrorCodesAndMessages.DOWNLOADING_EXCEPTION_DESCRIPTION;
 import static com.aparaskov.currency_rate_downloader.exception.ErrorCodesAndMessages.NO_NEW_CURRENCY_RATE_DESCRIPTION;
 
 @Service
@@ -57,18 +60,6 @@ public class CurrencyRateServiceImpl implements CurrencyRateService {
             return buildResponse();
         }
 
-        notificationService.sendNotification(TOPIC_NAME, NotificationDto.builder()
-                .payload(List.of(LatestCurrencyRateDto.builder()
-                        .ratio("ratio")
-                        .reverseRate("reverseRate")
-                        .name("name")
-                        .gold("gold")
-                        .fStar("fStar")
-                        .code("code")
-                        .currentDate("currentDate")
-                        .rate("rate")
-                        .build()))
-                .build());
         throw new NoNewCurrencyRateException(NO_NEW_CURRENCY_RATE_DESCRIPTION);
     }
 
@@ -87,6 +78,7 @@ public class CurrencyRateServiceImpl implements CurrencyRateService {
                 .build();
     }
 
+    @Transactional
     private List<LatestCurrencyRateDto> saveCurrencyRates(CurrencyRateDto currencyRateDto) {
         List<LatestCurrencyRateDto> currencies = new ArrayList<>();
 
@@ -148,7 +140,7 @@ public class CurrencyRateServiceImpl implements CurrencyRateService {
                 return Collections.emptyList();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new DownloadingException(DOWNLOADING_EXCEPTION_DESCRIPTION);
         }
     }
 

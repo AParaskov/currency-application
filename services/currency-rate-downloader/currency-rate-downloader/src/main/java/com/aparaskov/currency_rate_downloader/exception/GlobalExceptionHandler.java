@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static com.aparaskov.currency_rate_downloader.exception.ErrorCodesAndMessages.BAD_REQUEST_ERROR;
+import static com.aparaskov.currency_rate_downloader.exception.ErrorCodesAndMessages.DOWNLOADING_EXCEPTION_MESSAGE;
+import static com.aparaskov.currency_rate_downloader.exception.ErrorCodesAndMessages.INTERNAL_SERVER_ERROR;
 import static com.aparaskov.currency_rate_downloader.exception.ErrorCodesAndMessages.NO_NEW_CURRENCY_RATE_MESSAGE;
 
 @ControllerAdvice
@@ -25,6 +27,20 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .errorCode(BAD_REQUEST_ERROR)
                 .errorMessage(NO_NEW_CURRENCY_RATE_MESSAGE)
+                .description(errorMessageDescription)
+                .build();
+
+        return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DownloadingException.class)
+    public ResponseEntity<Object> handleDownloadingException(DownloadingException ex) {
+        String errorMessageDescription = checkIfErrorMessageDescriptionIsValid(ex.getMessage());
+
+        CustomError errorMessage = CustomError.builder()
+                .timestamp(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .errorCode(INTERNAL_SERVER_ERROR)
+                .errorMessage(DOWNLOADING_EXCEPTION_MESSAGE)
                 .description(errorMessageDescription)
                 .build();
 

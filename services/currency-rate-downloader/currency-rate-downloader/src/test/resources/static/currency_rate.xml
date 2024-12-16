@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROWSET>
+    <ROW>
+        <GOLD>0</GOLD>
+        <NAME_>Currency</NAME_>
+        <CODE>Code</CODE>
+        <RATIO>Per unit of currency/gold</RATIO>
+        <REVERSERATE>Reverse rate for 1 BGN</REVERSERATE>
+        <RATE>Levs (BGN)</RATE>
+        <EXTRAINFO>Note: Exchange rates are calculated pursuant to Art. 12 of the Currency Law and are used for purposes as provided for by law.<br />* Due to the situation on the international financial markets, the Bulgarian National Bank (BNB) is not in a position to set a reference exchange rate for the Bulgarian Lev against the Russian Rouble that is representative of market conditions. In this connection, the BNB is temporarily suspending the publication of the exchange rate of the Bulgarian Lev against the Russian Rouble until market conditions normalise. The last exchange rate of the Bulgarian Lev against the Russian Rouble was published on 1 March 2022.</EXTRAINFO>
+        <CURR_DATE>Date</CURR_DATE>
+        <TITLE>Foreign Exchange Rates of the Bulgarian lev and Price of Gold valid for 10.12.2024</TITLE>
+        <F_STAR>0</F_STAR>
+    </ROW>
+    <ROW>
+        <GOLD>gold</GOLD>
+        <NAME_>name</NAME_>
+        <CODE>code</CODE>
+        <RATIO>ratio</RATIO>
+        <REVERSERATE>reverseRate</REVERSERATE>
+        <RATE>rate</RATE>
+        <CURR_DATE>12.12.2024</CURR_DATE>
+        <F_STAR>fStar</F_STAR>
+    </ROW>
+</ROWSET>

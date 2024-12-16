@@ -4,7 +4,10 @@ import com.aparaskov.currency_rate_consumer.entity.dto.NotificationDto;
 import com.aparaskov.currency_rate_consumer.service.LatestCurrencyRateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.messaging.simp.stomp.*;
+import org.springframework.messaging.simp.stomp.StompCommand;
+import org.springframework.messaging.simp.stomp.StompHeaders;
+import org.springframework.messaging.simp.stomp.StompSession;
+import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
