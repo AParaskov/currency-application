@@ -35,19 +35,16 @@ public class TestUtil {
         return Rate.builder()
                 .currencyCode(CurrencyCode.AUD)
                 .rate(0.10)
-                .id(1L)
                 .ratio(1)
                 .reverseRate(0.10)
                 .fStar(1)
                 .gold(1)
                 .currentRateDate(LocalDate.now())
-                .currency(new Currency())
                 .build();
     }
 
     public static Currency buildValidCurrency() {
         return Currency.builder()
-                .id(1L)
                 .name("name")
                 .build();
     }
