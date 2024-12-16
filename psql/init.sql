@@ -1,0 +1,2 @@
+CREATE DATABASE currency_rate_downloader_db;
+CREATE DATABASE currency_rate_consumer_db;
